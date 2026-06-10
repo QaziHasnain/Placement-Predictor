@@ -1,5 +1,5 @@
 student_placement_project/
-├── data/                   # Store your Kaggle datasets here
+├── data/                    
 │   ├── raw/                # Original, unaltered data
 │   └── processed/          # Data after cleaning and One-Hot Encoding
 ├── notebooks/              # Jupyter notebooks for experimentation
