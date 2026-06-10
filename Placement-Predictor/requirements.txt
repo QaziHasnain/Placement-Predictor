@@ -1,0 +1,11 @@
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+xgboost
+streamlit
+flask
+flask-login
+flask-pymongo
+joblib

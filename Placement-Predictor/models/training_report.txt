@@ -1,0 +1,63 @@
+Data diagnostics:
+Original rows: 45000
+Rows after deduplication: 45000
+Duplicate rows removed: 0
+Dropped leakage/id columns: ['Student_ID']
+Class counts: {0: 28688, 1: 16312}
+
+Model:
+LogisticRegression(
+    C=1.0,
+    class_weight="balanced",
+    max_iter=2000,
+    random_state=42
+)
+
+Cross-validation:
+5-fold train F1 scores: [0.827, 0.8261, 0.8245, 0.8193, 0.8188]
+Mean CV F1: 0.8231
+Std CV F1: 0.0034
+
+Train vs test:
+Train accuracy: 0.8625
+Test accuracy: 0.8601
+Accuracy gap: 0.0024
+
+Test metrics:
+Accuracy: 0.8601
+Precision: 0.7683
+Recall: 0.8792
+F1-score: 0.8200
+
+Confusion matrix:
+[[4873  865]
+ [ 394 2868]]
+
+Classification report:
+              precision    recall  f1-score   support
+
+  Not Placed       0.93      0.85      0.89      5738
+      Placed       0.77      0.88      0.82      3262
+
+    accuracy                           0.86      9000
+   macro avg       0.85      0.86      0.85      9000
+weighted avg       0.87      0.86      0.86      9000
+
+
+Top model weights:
+                      feature  coefficient  absolute_weight
+            numeric__Backlogs    -1.848926         1.848926
+numeric__Communication_Skills     1.378238         1.378238
+      numeric__Certifications     0.866539         0.866539
+         numeric__Skill_Score     0.551606         0.551606
+   numeric__Academic_Strength     0.475575         0.475575
+  numeric__Soft_Skills_Rating    -0.286994         0.286994
+     categorical__Gender_Male    -0.275185         0.275185
+   categorical__Gender_Female    -0.274171         0.274171
+      categorical__Branch_CSE    -0.247084         0.247084
+    categorical__Branch_Civil    -0.202088         0.202088
+            numeric__Projects     0.197258         0.197258
+      categorical__Degree_BCA    -0.179252         0.179252
+   categorical__Degree_B.Tech    -0.170622         0.170622
+ numeric__Aptitude_Test_Score     0.136130         0.136130
+                numeric__CGPA     0.132689         0.132689

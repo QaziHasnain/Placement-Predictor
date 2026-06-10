@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Placement AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="auth-page">
+    <main class="panel auth-card">
+        <div class="brand">
+            <div class="brand-mark">P</div>
+            <div class="brand-copy">
+                <strong>Placement AI</strong>
+                <span>Create your workspace</span>
+            </div>
+        </div>
+
+        <div class="eyebrow">Start predicting</div>
+        <h1>Register</h1>
+        <p class="section-copy">Create an account to access the modern placement readiness dashboard.</p>
+
+        <form method="POST" action="/register">
+            <div class="field">
+                <label for="username">Username</label>
+                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg></span>
+                <input id="username" type="text" name="username" placeholder="Choose username" required>
+            </div>
+
+            <div class="field">
+                <label for="email">Email</label>
+                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+                <input id="email" type="email" name="email" placeholder="Enter email" required>
+            </div>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+                <input id="password" type="password" name="password" placeholder="Create password" required>
+            </div>
+
+            <button class="primary-button" type="submit">Create account</button>
+        </form>
+
+        <div class="auth-foot">Already have an account? <a href="/login">Login</a></div>
+    </main>
+</body>
+</html>

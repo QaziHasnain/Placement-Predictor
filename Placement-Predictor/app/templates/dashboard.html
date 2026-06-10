@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement AI Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-mark">P</div>
+                <div class="brand-copy">
+                    <strong>Placement AI</strong>
+                    <span>Career readiness lab</span>
+                </div>
+            </div>
+
+            <div class="nav-list">
+                <a class="nav-item active" href="/dashboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+                    Dashboard
+                </a>
+                <a class="nav-item" href="/predict">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16v-5"/><path d="M12 16V8"/><path d="M16 16v-3"/></svg>
+                    Predictor
+                </a>
+                <a class="nav-item" href="/logout">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M21 19V5"/></svg>
+                    Logout
+                </a>
+            </div>
+
+            <div class="nav-section secondary">Workspace</div>
+            <div class="nav-list">
+                <span class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20v-6"/><path d="M6 20V10"/><path d="M18 20V4"/></svg>
+                    Skills analysis
+                </span>
+                <span class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg>
+                    Suggestions
+                </span>
+            </div>
+
+            <div class="sidebar-bottom">
+                <div class="mini-drop">
+                    <span class="plus">+</span>
+                    <strong>New assessment</strong>
+                    <div class="helper">Run a fresh placement check</div>
+                </div>
+                <div class="theme-toggle" aria-label="Theme toggle">
+                    <button type="button" data-theme-choice="light">Light</button>
+                    <button type="button" data-theme-choice="dark" class="active">Dark</button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div class="search">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+                    <input type="search" placeholder="Search anything">
+                </div>
+                <div class="top-actions">
+                    <span class="icon-button" title="Messages">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+                    </span>
+                    <span class="icon-button" title="Notifications">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+                    </span>
+                    <span class="avatar">{{ username[0]|upper }}</span>
+                </div>
+            </header>
+
+            <section class="content">
+                <div class="hero-row">
+                    <div>
+                        <div class="eyebrow">Welcome back, {{ username }}</div>
+                        <h1>Dashboard</h1>
+                        <p>Track placement readiness, scan important skill signals, and launch the predictor from one focused workspace.</p>
+                    </div>
+                    <a class="primary-button" href="/predict">
+                        Start prediction
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+
+                <div class="metrics">
+                    <div class="metric">
+                        <span class="metric-label">Avg readiness</span>
+                        <strong class="metric-value">78%</strong>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Strong signal</span>
+                        <strong class="metric-value">CGPA</strong>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Focus area</span>
+                        <strong class="metric-value">Coding</strong>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <section class="panel">
+                        <div class="panel-pad">
+                            <h2>Readiness profile</h2>
+                            <p class="section-copy">A quick sample view of how the predictor weighs common placement factors.</p>
+                        </div>
+                        <div class="chart" aria-label="Readiness chart">
+                            <div class="bar"><span style="height: 42%"></span><span>CGPA</span></div>
+                            <div class="bar"><span style="height: 58%"></span><span>Projects</span></div>
+                            <div class="bar"><span style="height: 70%"></span><span>Coding</span></div>
+                            <div class="bar"><span style="height: 52%"></span><span>Comm</span></div>
+                            <div class="bar"><span style="height: 86%"></span><span>Aptitude</span></div>
+                        </div>
+                    </section>
+
+                    <aside class="panel panel-pad">
+                        <h2>Next actions</h2>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <span class="dot"></span>
+                                <div>
+                                    <strong>Run a prediction</strong>
+                                    <div class="helper">Use your latest academics and skills.</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <span class="dot peach"></span>
+                                <div>
+                                    <strong>Improve weak factors</strong>
+                                    <div class="helper">Review suggestions after the result.</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <span class="dot blue"></span>
+                                <div>
+                                    <strong>Retest after updates</strong>
+                                    <div class="helper">Compare probability changes.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const root = document.documentElement;
+        const savedTheme = localStorage.getItem("placement-theme") || "dark";
+        root.dataset.theme = savedTheme;
+        document.querySelectorAll("[data-theme-choice]").forEach((button) => {
+            button.classList.toggle("active", button.dataset.themeChoice === savedTheme);
+            button.addEventListener("click", () => {
+                root.dataset.theme = button.dataset.themeChoice;
+                localStorage.setItem("placement-theme", button.dataset.themeChoice);
+                document.querySelectorAll("[data-theme-choice]").forEach((item) => {
+                    item.classList.toggle("active", item === button);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

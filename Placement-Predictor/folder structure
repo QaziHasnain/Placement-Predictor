@@ -1,0 +1,15 @@
+student_placement_project/
+├── data/                   # Store your Kaggle datasets here
+│   ├── raw/                # Original, unaltered data
+│   └── processed/          # Data after cleaning and One-Hot Encoding
+├── notebooks/              # Jupyter notebooks for experimentation
+│   └── exploration.ipynb   # For Correlation Heatmaps and initial analysis
+├── src/                    # Source code for the production pipeline
+│   ├── preprocessing.py    # Scripts for One-Hot Encoding and scaling
+│   ├── train.py            # Script to train Random Forest or XGBoost
+│   └── predict.py          # Script for making new predictions
+├── models/                 # Saved versions of your trained models (.pkl or .bst)
+├── app/                    # Deployment files
+│   └── dashboard.py        # Streamlit interface code
+├── requirements.txt        # List of libraries (Pandas, Scikit-learn, etc.)
+└── README.md               # Project documentation and setup instructions

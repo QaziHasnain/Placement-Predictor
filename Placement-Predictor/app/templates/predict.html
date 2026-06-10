@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-mark">P</div>
+                <div class="brand-copy">
+                    <strong>Placement AI</strong>
+                    <span>Prediction studio</span>
+                </div>
+            </div>
+
+            <div class="nav-list">
+                <a class="nav-item" href="/dashboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+                    Dashboard
+                </a>
+                <a class="nav-item active" href="/predict">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16v-5"/><path d="M12 16V8"/><path d="M16 16v-3"/></svg>
+                    Predictor
+                </a>
+                <a class="nav-item" href="/logout">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M21 19V5"/></svg>
+                    Logout
+                </a>
+            </div>
+
+            <div class="sidebar-bottom">
+                <div class="mini-drop">
+                    <span class="plus">+</span>
+                    <strong>New scenario</strong>
+                    <div class="helper">Change inputs and compare</div>
+                </div>
+                <div class="theme-toggle" aria-label="Theme toggle">
+                    <button type="button" data-theme-choice="light">Light</button>
+                    <button type="button" data-theme-choice="dark" class="active">Dark</button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div class="search">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+                    <input type="search" placeholder="Search fields or factors">
+                </div>
+                <div class="top-actions">
+                    <a class="icon-button" href="/dashboard" title="Back to dashboard">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+                    </a>
+                </div>
+            </header>
+
+            <section class="content">
+                <div class="hero-row">
+                    <div>
+                        <div class="eyebrow">ML placement estimate</div>
+                        <h1>Student Placement Predictor</h1>
+                        <p>Enter academic, skill, and profile details to estimate placement probability with a cleaner result view.</p>
+                    </div>
+                </div>
+
+                <div class="form-layout">
+                    <form class="panel panel-pad" method="POST">
+                        <h2>Student profile</h2>
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="age">Age</label>
+                                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg></span>
+                                <input id="age" type="number" name="age" value="{{ form_data.age }}" min="18" max="30" required>
+                            </div>
+
+                            <div class="field">
+                                <label for="cgpa">CGPA</label>
+                                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></span>
+                                <input id="cgpa" type="number" name="cgpa" value="{{ form_data.cgpa }}" step="0.1" min="0" max="10" required>
+                            </div>
+
+                            <div class="field">
+                                <label for="internships">Internships</label>
+                                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
+                                <input id="internships" type="number" name="internships" value="{{ form_data.internships }}" min="0" max="5" required>
+                            </div>
+
+                            <div class="field">
+                                <label for="projects">Projects</label>
+                                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg></span>
+                                <input id="projects" type="number" name="projects" value="{{ form_data.projects }}" min="0" max="10" required>
+                            </div>
+
+                            <div class="range-field">
+                                <div class="range-head"><span>Coding skills</span><strong id="codingVal">{{ form_data.coding }}</strong></div>
+                                <input type="range" name="coding" min="1" max="10" value="{{ form_data.coding }}" data-output="codingVal">
+                            </div>
+
+                            <div class="range-field">
+                                <div class="range-head"><span>Communication</span><strong id="commVal">{{ form_data.comm }}</strong></div>
+                                <input type="range" name="comm" min="1" max="10" value="{{ form_data.comm }}" data-output="commVal">
+                            </div>
+
+                            <div class="range-field">
+                                <div class="range-head"><span>Aptitude score</span><strong id="aptVal">{{ form_data.aptitude }}</strong></div>
+                                <input type="range" name="aptitude" min="35" max="100" value="{{ form_data.aptitude }}" data-output="aptVal">
+                            </div>
+
+                            <div class="range-field">
+                                <div class="range-head"><span>Soft skills</span><strong id="softVal">{{ form_data.soft_skills }}</strong></div>
+                                <input type="range" name="soft_skills" min="1" max="10" value="{{ form_data.soft_skills }}" data-output="softVal">
+                            </div>
+
+                            <div class="field">
+                                <label for="certs">Certifications</label>
+                                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 3h10v6H7z"/><path d="M12 9v12"/><path d="M8 21l4-3 4 3"/></svg></span>
+                                <input id="certs" type="number" name="certs" value="{{ form_data.certs }}" min="0" max="10" required>
+                            </div>
+
+                            <div class="field">
+                                <label for="backlogs">Backlogs</label>
+                                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 7v6"/><path d="M12 17h.01"/></svg></span>
+                                <input id="backlogs" type="number" name="backlogs" value="{{ form_data.backlogs }}" min="0" max="10" required>
+                            </div>
+
+                            <div class="field">
+                                <label for="gender">Gender</label>
+                                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M12 12v9"/><path d="M8 17h8"/></svg></span>
+                                <select id="gender" name="gender">
+                                    <option {{ 'selected' if form_data.gender == 'Male' else '' }}>Male</option>
+                                    <option {{ 'selected' if form_data.gender == 'Female' else '' }}>Female</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="degree">Degree</label>
+                                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span>
+                                <select id="degree" name="degree">
+                                    <option {{ 'selected' if form_data.degree == 'B.Tech' else '' }}>B.Tech</option>
+                                    <option {{ 'selected' if form_data.degree == 'BCA' else '' }}>BCA</option>
+                                    <option {{ 'selected' if form_data.degree == 'MCA' else '' }}>MCA</option>
+                                    <option {{ 'selected' if form_data.degree == 'B.Sc' else '' }}>B.Sc</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="branch">Branch</label>
+                                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3v12"/><path d="M18 9v12"/><path d="M6 15l6-6 6 6"/><path d="M6 3l6 6 6-6"/></svg></span>
+                                <select id="branch" name="branch">
+                                    <option {{ 'selected' if form_data.branch == 'CSE' else '' }}>CSE</option>
+                                    <option {{ 'selected' if form_data.branch == 'IT' else '' }}>IT</option>
+                                    <option {{ 'selected' if form_data.branch == 'ECE' else '' }}>ECE</option>
+                                    <option {{ 'selected' if form_data.branch == 'ME' else '' }}>ME</option>
+                                    <option {{ 'selected' if form_data.branch == 'Civil' else '' }}>Civil</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="submit-row">
+                            <button class="primary-button" type="submit">Predict placement</button>
+                            <a class="secondary-button" href="/dashboard">Back to dashboard</a>
+                        </div>
+                    </form>
+
+                    <aside class="panel panel-pad result-card">
+                        <div class="eyebrow">Prediction result</div>
+                        {% if result %}
+                            {% set is_placed = result == 'PLACED' %}
+                            <div class="score-ring {{ '' if is_placed else 'low' }}" style="--score: {{ probability }}%">
+                                <div class="score-inner">
+                                    <strong>{{ probability }}%</strong>
+                                    <span class="helper">chance</span>
+                                </div>
+                            </div>
+                            <span class="badge {{ '' if is_placed else 'low' }}">{{ 'Likely placed' if is_placed else 'Needs preparation' }}</span>
+                            <div class="progress {{ '' if is_placed else 'low' }}" style="--score: {{ probability }}%">
+                                <span></span>
+                            </div>
+                            <p class="section-copy">
+                                {% if is_placed %}
+                                    The model sees a strong placement profile. Keep projects, coding practice, and interview readiness consistent.
+                                {% else %}
+                                    The current profile needs improvement before placement rounds. Strengthen the highest-impact areas below and test again.
+                                {% endif %}
+                            </p>
+                            <div class="empty-state" style="margin-top: 16px;">
+                                Prediction is probabilistic, not guaranteed. Use it as a readiness signal, not a final placement decision.
+                            </div>
+                        {% else %}
+                            <div class="empty-state">
+                                Your prediction will appear here with placement probability, a progress indicator, and targeted suggestions after you submit the form.
+                            </div>
+                        {% endif %}
+
+                        <h2 style="margin-top: 24px;">Recommended focus</h2>
+                        <div class="suggestion-list">
+                            <div class="suggestion">
+                                <span class="dot"></span>
+                                <div>
+                                    <strong>Raise coding score</strong>
+                                    <div class="helper">Practice DSA and timed problem sets.</div>
+                                </div>
+                            </div>
+                            <div class="suggestion">
+                                <span class="dot peach"></span>
+                                <div>
+                                    <strong>Add proof of work</strong>
+                                    <div class="helper">Ship projects with clear outcomes.</div>
+                                </div>
+                            </div>
+                            <div class="suggestion">
+                                <span class="dot blue"></span>
+                                <div>
+                                    <strong>Prepare interviews</strong>
+                                    <div class="helper">Improve aptitude and communication.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const root = document.documentElement;
+        const savedTheme = localStorage.getItem("placement-theme") || "dark";
+        root.dataset.theme = savedTheme;
+        document.querySelectorAll("[data-theme-choice]").forEach((button) => {
+            button.classList.toggle("active", button.dataset.themeChoice === savedTheme);
+            button.addEventListener("click", () => {
+                root.dataset.theme = button.dataset.themeChoice;
+                localStorage.setItem("placement-theme", button.dataset.themeChoice);
+                document.querySelectorAll("[data-theme-choice]").forEach((item) => {
+                    item.classList.toggle("active", item === button);
+                });
+            });
+        });
+
+        document.querySelectorAll('input[type="range"][data-output]').forEach((range) => {
+            const output = document.getElementById(range.dataset.output);
+            range.addEventListener("input", () => {
+                output.textContent = range.value;
+            });
+        });
+    </script>
+</body>
+</html>

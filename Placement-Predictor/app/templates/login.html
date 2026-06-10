@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Placement AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="auth-page">
+    <main class="panel auth-card">
+        <div class="brand">
+            <div class="brand-mark">P</div>
+            <div class="brand-copy">
+                <strong>Placement AI</strong>
+                <span>Student prediction platform</span>
+            </div>
+        </div>
+
+        <div class="eyebrow">Welcome back</div>
+        <h1>Login</h1>
+        <p class="section-copy">Access your placement dashboard and run a fresh readiness prediction.</p>
+
+        <form method="POST">
+            <div class="field">
+                <label for="username">Username</label>
+                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg></span>
+                <input id="username" type="text" name="username" placeholder="Enter username" required>
+            </div>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+                <input id="password" type="password" name="password" placeholder="Enter password" required>
+            </div>
+
+            <button class="primary-button" type="submit">Login</button>
+        </form>
+
+        <div class="auth-foot">Do not have an account? <a href="/register">Register</a></div>
+    </main>
+</body>
+</html>
